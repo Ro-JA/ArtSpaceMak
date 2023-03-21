@@ -13,7 +13,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,7 +23,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,8 +35,7 @@ class MainActivity : ComponentActivity() {
             ArtSpaceMakTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
                 ) {
                     ArtSpaceApp()
                 }
@@ -46,8 +44,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// основная функция приложения соберает все вместе
 @Composable
 fun ArtSpaceApp() {
+//    зададим пременые для хранения данных
+    val imagePhoto: Painter
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -59,33 +60,39 @@ fun ArtSpaceApp() {
 
 
     ) {
-        ImageKids(
-            painter = painterResource(id = R.drawable.maryana_22_04_22),
-            stringRes = stringResource(
-                id = R.string.girl
-            )
-        )
+        ImageKids()
         Spacer(modifier = Modifier.padding(16.dp))
-        TextInformation(
-            text = stringResource(id = R.string.maryana),
-            date = stringResource(id = R.string.maryana_22_04_22)
-        )
+        TextInformation()
         Spacer(modifier = Modifier.padding(16.dp))
         ButtonNextAndBack()
     }
 }
 
+// функция для отоброжения фото
 @Composable
-fun ImageKids(painter: Painter, stringRes: String) {
+fun ImageKids(imageKids: Int = 1, boyOrGirl: Int = 1) {
+    val contentDescription = if (boyOrGirl == 1) stringResource(id = R.string.boy)
+    else stringResource(id = R.string.girl)
+    val resourceDrawable = when (imageKids) {
+        1 -> painterResource(id = R.drawable.mark_24_09_15)
+        2 -> painterResource(id = R.drawable.mark_26_02_16)
+        3 -> painterResource(id = R.drawable.mark_20_06_17)
+        4 -> painterResource(id = R.drawable.mark_10_01_18)
+        5 -> painterResource(id = R.drawable.maryan_6_06_21)
+        6 -> painterResource(id = R.drawable.maryana_11_02_22)
+        7 -> painterResource(id = R.drawable.maryana_22_04_22)
+        8 -> painterResource(id = R.drawable.maryna_10_06_22)
+        else -> painterResource(id = R.drawable.maryana_1_03_23)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
+            .padding(16.dp), contentAlignment = Alignment.Center
     ) {
         Image(
-            painter = painter,
-            contentDescription = stringRes,
+            painter = resourceDrawable,
+            contentDescription = contentDescription,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(300.dp)
@@ -94,45 +101,57 @@ fun ImageKids(painter: Painter, stringRes: String) {
     }
 }
 
+// функция для отоброжения текста
 @Composable
-fun TextInformation(text: String, date: String) {
+fun TextInformation(name: Int = 1, textDate: Int = 1) {
+    val maryanaOrMark = if (name == 1) stringResource(id = R.string.mark)
+    else stringResource(id = R.string.maryana)
+    val date = when (textDate) {
+        1 -> stringResource(id = R.string.mark_24_09_15)
+        2 -> stringResource(id = R.string.mark_26_02_16)
+        3 -> stringResource(id = R.string.mark_20_06_17)
+        4 -> stringResource(id = R.string.mark_10_01_18)
+        5 -> stringResource(id = R.string.maryana_6_06_21)
+        6 -> stringResource(id = R.string.maryana_11_02_22)
+        7 -> stringResource(id = R.string.maryana_22_04_22)
+        8 -> stringResource(id = R.string.maryana_10_06_22)
+        else -> stringResource(id = R.string.maryana_1_03_23)
+
+    }
     Text(
-        text = text,
+        text = maryanaOrMark,
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
     )
     Spacer(modifier = Modifier.padding(8.dp))
     Text(
-        text = date,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold
+        text = date, fontSize = 20.sp, fontWeight = FontWeight.Bold
     )
 }
 
+// функция отвечает за кнопки
 @Composable
 fun ButtonNextAndBack() {
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
         Button(
             onClick = { /*TODO*/ },
         ) {
             Text(
-                text = stringResource(id = R.string.next),
-                color = Color.Black
+                text = stringResource(id = R.string.back), color = Color.Black
             )
         }
         Spacer(modifier = Modifier.padding(8.dp))
         Button(onClick = { /*TODO*/ }) {
             Text(
-                text = stringResource(id = R.string.back),
-                color = Color.Black
+                text = stringResource(id = R.string.next), color = Color.Black
             )
         }
 
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
