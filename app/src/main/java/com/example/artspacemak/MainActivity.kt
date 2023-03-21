@@ -66,7 +66,12 @@ fun ArtSpaceApp() {
             )
         )
         Spacer(modifier = Modifier.padding(16.dp))
-        TextInformation(text = stringResource(id = R.string.maryana))
+        TextInformation(
+            text = stringResource(id = R.string.maryana),
+            date = stringResource(id = R.string.maryana_22_04_22)
+        )
+        Spacer(modifier = Modifier.padding(16.dp))
+        ButtonNextAndBack()
     }
 }
 
@@ -90,20 +95,40 @@ fun ImageKids(painter: Painter, stringRes: String) {
 }
 
 @Composable
-fun TextInformation(text: String) {
+fun TextInformation(text: String, date: String) {
     Text(
         text = text,
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
     )
+    Spacer(modifier = Modifier.padding(8.dp))
+    Text(
+        text = date,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold
+    )
 }
 
 @Composable
 fun ButtonNextAndBack() {
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Button(onClick = { /*TODO*/ },
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Button(
+            onClick = { /*TODO*/ },
         ) {
-
+            Text(
+                text = stringResource(id = R.string.next),
+                color = Color.Black
+            )
+        }
+        Spacer(modifier = Modifier.padding(8.dp))
+        Button(onClick = { /*TODO*/ }) {
+            Text(
+                text = stringResource(id = R.string.back),
+                color = Color.Black
+            )
         }
 
     }
