@@ -48,7 +48,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ArtSpaceApp() {
 //    зададим пременые для хранения данных
-    val imagePhoto: Painter
+    var imageState by remember { mutableStateOf(1) }
+    var markOrMaryana = 1
+    if (imageState in 1..4) markOrMaryana = 1 else markOrMaryana = 2
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,11 +62,29 @@ fun ArtSpaceApp() {
 
 
     ) {
-        ImageKids()
+
+        ImageKids(imageState, markOrMaryana)
         Spacer(modifier = Modifier.padding(16.dp))
-        TextInformation()
+        TextInformation(imageState, markOrMaryana)
         Spacer(modifier = Modifier.padding(16.dp))
-        ButtonNextAndBack()
+        Row(
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
+        ) {
+            Button(
+                onClick = { imageState++ },
+            ) {
+                Text(
+                    text = stringResource(id = R.string.back), color = Color.Black
+                )
+            }
+            Spacer(modifier = Modifier.padding(8.dp))
+            Button(onClick = { imageState-- }) {
+                Text(
+                    text = stringResource(id = R.string.next), color = Color.Black
+                )
+            }
+
+        }
     }
 }
 
@@ -132,24 +152,7 @@ fun TextInformation(name: Int = 1, textDate: Int = 1) {
 // функция отвечает за кнопки
 @Composable
 fun ButtonNextAndBack() {
-    Row(
-        modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
-    ) {
-        Button(
-            onClick = { /*TODO*/ },
-        ) {
-            Text(
-                text = stringResource(id = R.string.back), color = Color.Black
-            )
-        }
-        Spacer(modifier = Modifier.padding(8.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Text(
-                text = stringResource(id = R.string.next), color = Color.Black
-            )
-        }
 
-    }
 }
 
 
