@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -99,7 +100,13 @@ fun TextInformation(text: String) {
 
 @Composable
 fun ButtonNextAndBack() {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Button(onClick = { /*TODO*/ },
+        ) {
 
+        }
+
+    }
 }
 
 @Preview(showBackground = true)
