@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
 fun ArtSpaceApp() {
 //    зададим пременые для хранения данных
     var imageState by remember { mutableStateOf(1) }
-    var markOrMaryana = 1
+    var markOrMaryana by remember { mutableStateOf(1) }
     if (imageState in 1..4) markOrMaryana = 1 else markOrMaryana = 2
     Column(
         modifier = Modifier
