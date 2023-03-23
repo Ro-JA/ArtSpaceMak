@@ -70,14 +70,24 @@ fun ArtSpaceApp() {
             modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = { imageState++ },
+                onClick = {
+                    --imageState
+                    if (imageState == 1) {
+                        imageState = 1
+                    }
+                          },
             ) {
                 Text(
                     text = stringResource(id = R.string.back), color = Color.Black
                 )
             }
             Spacer(modifier = Modifier.padding(8.dp))
-            Button(onClick = { imageState-- }) {
+            Button(onClick = {
+                imageState++
+                if(imageState == 10) {
+                    imageState = 1
+                }
+            }) {
                 Text(
                     text = stringResource(id = R.string.next), color = Color.Black
                 )
@@ -87,9 +97,9 @@ fun ArtSpaceApp() {
     }
 }
 
-// функция для отоброжения фото
+// функция для отоброжения фото принимает пармаметр imageKids для фото и boyOrGirl для contentDescription
 @Composable
-fun ImageKids(imageKids: Int = 1, boyOrGirl: Int = 1) {
+fun ImageKids(imageKids: Int, boyOrGirl: Int) {
     val contentDescription = if (boyOrGirl == 1) stringResource(id = R.string.boy)
     else stringResource(id = R.string.girl)
     val resourceDrawable = when (imageKids) {
@@ -120,7 +130,7 @@ fun ImageKids(imageKids: Int = 1, boyOrGirl: Int = 1) {
     }
 }
 
-// функция для отоброжения текста
+// функция для отоброжения текста принимает два параметра textDate отображает дату, а name имя
 @Composable
 fun TextInformation(textDate: Int, name: Int) {
     val textOne = if (name == 1)   stringResource(id = R.string.mark)
@@ -151,11 +161,7 @@ fun TextInformation(textDate: Int, name: Int) {
     )
 }
 
-// функция отвечает за кнопки
-@Composable
-fun ButtonNextAndBack() {
 
-}
 
 
 @Preview(showBackground = true)
