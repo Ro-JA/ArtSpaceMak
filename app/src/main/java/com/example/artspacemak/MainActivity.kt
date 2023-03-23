@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -123,9 +122,10 @@ fun ImageKids(imageKids: Int = 1, boyOrGirl: Int = 1) {
 
 // функция для отоброжения текста
 @Composable
-fun TextInformation(name: Int = 1, textDate: Int = 1) {
-    val maryanaOrMark = if (name == 1) stringResource(id = R.string.mark)
-    else stringResource(id = R.string.maryana)
+fun TextInformation(textDate: Int, name: Int) {
+    val textOne = if (name == 1)   stringResource(id = R.string.mark)
+    else  stringResource(id = R.string.maryana)
+
     val date = when (textDate) {
         1 -> stringResource(id = R.string.mark_24_09_15)
         2 -> stringResource(id = R.string.mark_26_02_16)
@@ -139,13 +139,15 @@ fun TextInformation(name: Int = 1, textDate: Int = 1) {
 
     }
     Text(
-        text = maryanaOrMark,
+        text = textOne,
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold,
     )
     Spacer(modifier = Modifier.padding(8.dp))
     Text(
-        text = date, fontSize = 20.sp, fontWeight = FontWeight.Bold
+        text = date,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold
     )
 }
 
