@@ -70,12 +70,7 @@ fun ArtSpaceApp() {
             modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = {
-                    --imageState
-                    if (imageState == 1) {
-                        imageState = 1
-                    }
-                          },
+                onClick = { --imageState },
             ) {
                 Text(
                     text = stringResource(id = R.string.back), color = Color.Black
